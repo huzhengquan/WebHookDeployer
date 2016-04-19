@@ -18,7 +18,7 @@ app.use(function *(next){
 	if(!tasks.hasOwnProperty(reqid)){
 		return this.status = 404;
 	}
-	if(tasks[reqid]['token']!=req_token){
+	if(tasks[reqid]['token'] && tasks[reqid]['token']!=req_token){
 		return this.status = 403;
 	}
 	console.log('run',tasks[reqid]);
