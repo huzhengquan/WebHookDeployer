@@ -6,17 +6,23 @@ const app = require('koa')(),
 
 app.use(require("koa-logger")());
 
+const conf = require('./config');
+
 app.use(function *(next){
 	if(this.method!='POST'){
 		return this.status = 404;
 	}
+	const req_token = (yield cobody.json(this))['token'];
 	const reqid = this.path.substring(1);
-	const conf = require('./config');
-	if(!conf.tasks.hasOwnProperty(reqid)){
+	const tasks = require('./config')['tasks'];
+	if(!tasks.hasOwnProperty(reqid)){
 		return this.status = 404;
 	}
-	console.log('run',conf.tasks[reqid]);
-	exec(conf.tasks[reqid]['command'],function(err, stdout, stderr){
+	if(tasks[reqid]['token']!=req_token){
+		return this.status = 403;
+	}
+	console.log('run',tasks[reqid]);
+	exec(tasks[reqid]['command'],function(err, stdout, stderr){
 		if(stderr) console.log('command stderr:',stderr);
 		if(stdout) console.log('command stdout:',stdout);
 	});
