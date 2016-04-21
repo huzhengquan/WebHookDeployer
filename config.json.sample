@@ -2,8 +2,11 @@
 	"port": 3000,
 	"tasks": {
 			"abc":{
-				"token": "efb",
-				"command": "date && sleep 10 && date"
+				"filter":{
+					"ref": "master",
+					"token": "dddd*4)"
+				},
+				"command": "su - work -c \"cd /data/myapp && git pull\""
 			}
 	}
 }

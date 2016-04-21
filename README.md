@@ -16,7 +16,9 @@ edit config.json
 	"port": 3000,
 	"tasks": {
 			"task_id":{
-				"token": "efb",
+				"filter":{
+					"token": "efb"
+				}
 				"command": "date && sleep 10 && date"
 			}
 	}
