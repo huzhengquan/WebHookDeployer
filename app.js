@@ -36,8 +36,8 @@ app.use(function *(next){
 	}
 	console.log('command: ',task['command']);
 	exec(task['command'],function(err, stdout, stderr){
-		if(err) console.log('command err:',err);
-		if(stderr) console.log('command stderr:',stderr);
+		if(err) console.error('command err:',err);
+		if(stderr) console.error('command stderr:',stderr);
 		if(stdout) console.log('command stdout:',stdout);
 	});
 	this.body='done';
